@@ -2,6 +2,10 @@ using System;
 
 namespace Base.Utils
 {
+	public class AssertionException : Exception
+	{
+	}
+	
     public class GameDebug
     {
     	private static object _fileLock = new object();
@@ -46,6 +50,14 @@ namespace Base.Utils
 		public static void LogFormat(string fmt, params object[] args)
 		{
 		    WriteLine(string.Format(fmt, args));
+		}
+		
+		public static void Assert(bool expr)
+		{
+			if (!expr)
+			{
+				throw new AssertionException();
+			}
 		}
     }
 }

@@ -94,6 +94,7 @@ namespace NetMQ.zmq.Utils
 
                 m_writeSocket.Connect(listner.LocalEndPoint);
                 m_readSocket = listner.Accept();
+				Base.Utils.GameDebug.LogFormat("<<Signaler.MakeSocketsPair Done>>");
             }            
         }
 
@@ -107,6 +108,7 @@ namespace NetMQ.zmq.Utils
 
         public void Send()
         {            
+			Base.Utils.GameDebug.LogFormat("<<Signaler.Send>>");
             int sent = m_writeSocket.Send(m_dummy);
 
             Debug.Assert(sent == 1);

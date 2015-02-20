@@ -372,6 +372,7 @@ namespace NetMQ.zmq
         //  Send command to the destination thread.
         public void SendCommand(int threadId, Command command)
         {
+			Base.Utils.GameDebug.LogFormat("SendCommand Thread:{0} cmd: {1}", threadId, command.CommandType);
             m_slots[threadId].Send(command);
         }
 

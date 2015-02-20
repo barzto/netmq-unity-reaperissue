@@ -186,7 +186,9 @@ namespace NetMQ.zmq.Utils
 
                 try
                 {
+                	Base.Utils.GameDebug.LogFormat("Select Query  {0}/{1}/{2}", readList.Count, writeList.Count, errorList.Count);
                     SocketUtility.Select(readList, writeList, errorList, timeout != 0 ? timeout * 1000 : -1);
+					Base.Utils.GameDebug.LogFormat("Select Result {0}/{1}/{2}", readList.Count, writeList.Count, errorList.Count);
                 }
                 catch (SocketException)
                 {
