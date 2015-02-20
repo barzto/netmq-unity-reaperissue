@@ -5,7 +5,6 @@ using System.Text;
 
 namespace NetMQ
 {
-#if !UNITY_EDITOR    
 	public static class EnumHelper	
     {
         public static bool HasFlag(this Enum value, Enum flag)
@@ -27,5 +26,4 @@ namespace NetMQ
             return ((Convert.ToUInt64(value) & num) == num);
         }
     }
-#endif
 }
