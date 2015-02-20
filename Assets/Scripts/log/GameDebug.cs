@@ -4,25 +4,37 @@ namespace Base.Utils
 {
     public class GameDebug
     {
+    	private static object _fileLock = new object();
+    	
 		public static void PrintToFile(string filePath, string fmt, params object[] args)
 		{
-			string msg = string.Format(fmt, args);
-			using (System.IO.StreamWriter w = new System.IO.StreamWriter(filePath, true))
+			lock(_fileLock)
 			{
-				w.WriteLine(msg);
+				string msg = string.Format(fmt, args);
+				using (System.IO.StreamWriter w = new System.IO.StreamWriter(filePath, true))
+				{
+					w.WriteLine(msg);
+				}
 			}
 		}
 		
-		private static string _logFilePath;
+		private static string _logFilePath = "./Game.log";
+#if UNITY_EDITOR
 		public static void Init()
 		{
 			_logFilePath = UnityEngine.Application.dataPath + "/../Game.log";
 		}
+#endif
 		
 		private static void WriteLine(string msg)
     	{
+#if UNITY_EDITOR
     		UnityEngine.Debug.Log(msg);
+#else
+			Console.WriteLine(msg);
+#endif
     		PrintToFile(_logFilePath, msg);
+    		
     	}
     	
     	
